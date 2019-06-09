@@ -1,0 +1,60 @@
+<?php
+/*
+ * PHP定义字符串的四种方式:
+ *
+ * 1. 单引号: 在单引号中，任何特殊字符都会按原样输出【除\\、\‘将会被转义输出】
+ * 2. 双引号: 在双引号中，遇到$将会解析该变量；
+ * 3. heredoc: heredoc可以理解为不使用双引号来定义字符串，但效果与使用双引号一致。
+ * 4. nowdoc: nowdoc是不使用单引号来定义，但效果相当于使用单引号来定义的字符串。
+ * */
+
+/*
+ * 单双引号之间的区别:
+　　1、双引号会替换变量的值，而单引号会把它当做字符串输出。
+　　2、对于转义的支持
+　　3、性能速度问题，由于双引号中的字符串需要检测是否含有$符号修饰的变量，因此从理论上讲，单引号是比较快的。
+ * */
+
+//heredoc
+$var = 'this is suifeng';
+echo <<<"EOT"
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <title>"随风"</title>
+</head>
+<body>
+66666666666<br/>
+"666666666"<br/>
+$var<br/>
+\$var<br/>
+\n666<br>
+</body>
+</html>
+
+EOT;
+
+//nowdoc
+$var = 'this is suifeng';
+echo <<<'EOT'
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <title>"随风"</title>
+</head>
+<body>
+'02020'<br/>
+\'<br/>
+66666666666<br/>
+"666666666"<br/>
+$var<br/>
+\$var<br/>
+\n666<br>
+</body>
+</html>
+
+EOT;
