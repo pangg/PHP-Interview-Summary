@@ -1,0 +1,56 @@
+<?php
+/*
+ * 1. cookie
+ * (1) 创建Cookie值
+ * Setcookie("标识键值","Cookie值","有效时间","有效作用域 / 表示当前网站下好使");
+ * $_COOKIE['标识键值'] = "Cookie值"; //  赋值设置Cookie
+ *
+ * （2）修改Cookie值
+ * Setcookie("标识键值","Cookie新值","新有效时间","新的有效作用域");
+ * $_COOKIE['标识键值'] = "Cookie新值";
+ *
+ * （3）删除Cookie值
+ * Setcookie("标识键值","空值",time()-1)
+ *
+ * （4）Cookie的优缺点
+ * 优点: .不需要服务器资源空间 b.持久时间更长
+ * 缺点: a.客户端大小受限制 b.用户禁用Cookie那么就废用了 c.不安全
+ *
+ * 2. session
+ * session_start();
+ * $_SESSION;
+ * session_destroy();
+ *
+ * session.auto_start = 0 //是否自动启动session，默认不启动
+ * session.cookie_domain    //cookie的有效域
+ * session.cookei_lifetime  //传递sessionid的Cookie有效期(秒)
+ * session.cookie_path     //cookie的有效路径
+ * session.name            //用在cookie里的session的名字
+ * session.save_path       //数据文件将保存的路径
+ * session.use_cookies     //是否使用cookies
+ * session.use_trans_sid   // 使用过渡性的 sid 支持
+ *
+ * //比如：session.gc_maxlifetime=30，session.gc_divisor=1000，session.gc_probability=1，就表示每一千个用户调用session_start()的时候，就百分百的会执行一次垃圾回收机制，将磁盘上没用的session文件删除。
+ * session.gc_probability = 1
+ * session.gc_divisor = 100
+ * session.gc_maxlifetime = 1440  //session最大生命周期
+ *
+ * session.save_handler = 'files' //默认以文件方式存取session数据
+ *
+ * session
+ * 优点： 1. 数据比较安全， 放置于服务器
+ * 缺点： 1.占用服务器资源（session文件会越来越多）；
+ *        2.分布式问题，多台服务器，可能session只存储在其中的一台（redis解决）
+ *
+ *
+ * 3. sessionId 传递问题：
+ * （1）用户禁用cookie，可以使用session_name()和session_id()（或者常量SID）
+ *      $url = '1.php?'.session_name().'='.session_id()
+ *      $url = '1.php?'.SID(只有用户禁用cookie，常量SID才是session_name和session_id的拼接值)
+ *      <a href="<?php echo $url; ?>">下一页</a>
+ *
+ * 4. session存储问题：（分布式多台服务器只在一台服务器保存cookie）
+ *      session_set_save_handler()： 设置用户自定义会话存储函数
+ *      mysql, redis, memcache等解决方案
+ *
+ * */
