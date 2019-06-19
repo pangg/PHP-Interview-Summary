@@ -1,7 +1,4 @@
-<?php
-/*
- * parent是指向父类的指针，一般我们使用parent来调用父类的构造函数
- * */
+parent是指向父类的指针，一般我们使用parent来调用父类的构造函数
 
 //建立基类Animal
 class Animal
