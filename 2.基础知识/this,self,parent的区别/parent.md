@@ -13,9 +13,8 @@ class Animal {
 }
 
 
-//定义派生类Person 继承自Animal类
-class Person extends Animal {
-    public$personSex;       //对于派生类，新定义了属性$personSex性别、$personAge年龄
+class Person extends Animal {  //定义派生类Person 继承自Animal类
+    public$personSex;    //对于派生类，新定义了属性$personSex性别、$personAge年龄
     public $personAge;
 
     //派生类的构造函数
