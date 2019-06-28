@@ -1,3 +1,4 @@
+```
 1. AJAX工作原理
     XMLHttpRequest是Ajax的基础
     XMLHttpRequest用于在后台与服务器交换数据
@@ -55,4 +56,4 @@
 
 4. jquery Ajax操作
     $(ele).load(), $.ajax(), $.get(), $.post(), $.getJSON(), $.getScript()
-
+```

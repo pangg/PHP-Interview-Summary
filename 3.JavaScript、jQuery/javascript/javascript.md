@@ -1,4 +1,5 @@
 JavaScript
+````
 1. 变量定义：
     （1）变量必须以字母开头， 也可以$和_符号开头
     （2）变量名称对大小写敏感
@@ -173,3 +174,4 @@ JavaScript
 16. JavaScript中为id是test的元素设置样式为good
     document.getElementById('test').className = 'good'
 
+```

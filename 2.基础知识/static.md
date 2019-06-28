@@ -1,4 +1,4 @@
-
+```
 1、函数体中的静态变量
 
 //1 函数体中的静态变量与全局中的静态变量不冲突，只有在关键字global作用下才会使局部与全局统一
@@ -159,3 +159,5 @@ class SpreadSheet extends Document
 
 print_r(User::create());
 print_r(SpreadSheet::create());
+
+```
