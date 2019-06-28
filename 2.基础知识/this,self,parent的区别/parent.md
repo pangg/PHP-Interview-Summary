@@ -1,9 +1,8 @@
 parent是指向父类的指针，一般我们使用parent来调用父类的构造函数
 
-
+```
 //建立基类Animal
 class Animal {
-
     public $name; //基类的属性，名字$name
 
     //基类的构造函数，初始化赋值
@@ -11,8 +10,9 @@ class Animal {
         $this->name = $name;
     }
 }
+```
 
-
+```
 class Person extends Animal {  //定义派生类Person 继承自Animal类
 
     public $personSex;    //对于派生类，新定义了属性$personSex性别、$personAge年龄
@@ -30,6 +30,7 @@ class Person extends Animal {  //定义派生类Person 继承自Animal类
         print( $this->name. " is ".$this->personSex. ",age is ".$this->personAge );
     }
 }
+```
 
 //实例化Person对象
 $personObject = new Person( "male", "21");
