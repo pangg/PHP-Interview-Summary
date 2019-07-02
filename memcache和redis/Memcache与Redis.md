@@ -143,7 +143,43 @@
 ```
 
 
+9. PHP使用redis防止大并发下二次写入
+    * PHP调用redis进去读写操作，大并发下会出现：读取key1，没有内容则写入内容，
+        但是大并发下会出现同时多个php进程写入的情况，这个时候需要加一个锁，
+        即获取锁的php进程有权限写。
+        ```
+        $lock_key = 'LOCK_PREFIX' . $redis_key;
+        $is_lock = $redis->setnx($lock_key, 1); // 加锁
+        if($is_lock == true){ // 获取锁权限
+            $redis->setex($redis_key, $expire, $data); // 写入内容
+            // 释放锁
+            $redis->del($lock_key);
+        }else{
+            return true; // 获取不到锁权限，直接返回
+        }
+        ```
 
+    * 思路是：设置一个锁的key，setnx是原子操作，只能一个进程写入成功，
+        写入成功返回true（表示获取锁权限），然后写入内容再释放锁即删除锁key。
+        获取不到锁的进程直接返回。但是这里有种情况，获取锁权限的进程，获取锁后运行报错了，
+        导致没有释放锁，那么一直就不能写入内容，这时就需要拿不到锁权限的进程去判断锁的剩余有效时间，
+        如果为-1则设置锁的有效时间为5秒（预留5秒给拿到锁的进程的运行时间，足够多了）。
+        改良后的代码：
+        ```
+        $lock_key = 'LOCK_PREFIX' . $redis_key;
+        $is_lock = $redis->setnx($lock_key, 1); // 加锁
+        if($is_lock == true){ // 获取锁权限
+            $redis->setex($redis_key, $expire, $data); // 写入内容
+            // 释放锁
+            $redis->del($lock_key);
+        }else{
+            // 防止死锁
+            if($redis->ttl($lock_key) == -1){
+                $redis->expire($lock_key, 5);
+            }
+            return true; // 获取不到锁权限，直接返回
+        }
+        ```
 
 
 
